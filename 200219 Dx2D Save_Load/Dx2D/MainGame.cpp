@@ -97,7 +97,7 @@ void MainGame::Init()
 {
 	SAFE_INIT(m_pMap);
 	SAFE_INIT(m_pPlayer);
-
+	m_pBoss->Init();
 	SAFE_INIT(m_pRect);
 
 	if (m_pProgressBar)

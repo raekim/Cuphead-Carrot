@@ -14,6 +14,7 @@ class Boss
 		MAX
 	};
 private:
+	ProgressBar*		m_pBar;
 	D3DXVECTOR2			m_vPosition;
 	float				m_hp;
 	Animation<STATE>*	m_pAnimation;

@@ -43,7 +43,8 @@ Boss::Boss()
 	{
 		m_carrotBullets.push_back(new CarrotBullet);
 	}
-	this->Init();
+
+	m_pBar = new ProgressBar(L"ProgressBack", L"ProgressFront");
 }
 
 
@@ -74,6 +75,12 @@ void Boss::Init()
 	m_stateDelta = 0;
 	m_stateDelay = rand() % 10;
 	if (m_stateDelay < 7) m_stateDelay = 7;
+
+	if (m_pBar)
+	{
+		m_pBar->SetSize(m_pAnimation->GetWidth(), 30);
+		m_pBar->Init();
+	}
 }
 
 void Boss::Update(PlayerBullet* playerBullets, D3DXVECTOR2 playerPos)
@@ -118,7 +125,7 @@ void Boss::Update(PlayerBullet* playerBullets, D3DXVECTOR2 playerPos)
 		// 맞았을 때
 		if (CircleCollision(bp, bulletRadius, m_hitCircle->GetPosition(), m_hitCircle->GetRadius()))
 		{
-			m_hp -= 3;
+			m_hp -= 2;
 
 			m_isHit = true;
 			m_hitDelta = 0;
@@ -173,12 +180,21 @@ void Boss::Update(PlayerBullet* playerBullets, D3DXVECTOR2 playerPos)
 	m_pAnimation->SetPosition(m_vPosition.x - g_camX * 0.03f, m_vPosition.y);
 	m_pAnimation->Play(m_eState);
 	m_pAnimation->Update();
+
+	if (m_pBar)
+	{
+		m_pBar->SetProgress(100, m_hp, true);
+		m_pBar->SetPos(m_vPosition.x - m_pAnimation->GetWidth()*0.5f,
+			m_vPosition.y + m_pAnimation->GetHeight()*0.25f);
+		m_pBar->Update();
+	}
 }
 
 void Boss::Render()
 {
 	SAFE_RENDER(m_pAnimation);
 	SAFE_RENDER(m_hitCircle);
+	SAFE_RENDER(m_pBar);
 }
 
 void Boss::RenderBullets()

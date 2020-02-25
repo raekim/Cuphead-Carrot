@@ -115,7 +115,7 @@ Player::~Player()
 void Player::Init()
 {
 	m_isDead = false;
-	m_hp = 5;	// 세 번 맞으면 죽는다
+	m_hp = 3;	// 세 번 맞으면 죽는다
 
 	m_eState = IDLE;
 	m_pAnimation->Play(m_eState);
@@ -147,7 +147,7 @@ void Player::Init()
 
 	if (m_pBar)
 	{
-		m_pBar->SetSize(m_pAnimation->GetWidth() * 0.5f, 30);
+		m_pBar->SetSize(m_pAnimation->GetWidth() * 0.5f, 20);
 		m_pBar->Init();
 	}
 
@@ -177,6 +177,14 @@ void Player::Update(vector<CarrotBullet*>& m_carrotBullets)
 
 	CarrotBulletCollision(m_carrotBullets);
 	SAFE_UPDATE(m_pBullet);
+
+	if (m_pBar)
+	{
+		m_pBar->SetProgress(3, m_hp, true);
+		m_pBar->SetPos(m_vPosition.x - m_pAnimation->GetWidth() * 0.25f,
+			m_vPosition.y + m_pAnimation->GetHeight()*0.5f);
+		m_pBar->Update();
+	}
 }
 
 void Player::ProcessHit()
@@ -456,7 +464,7 @@ void Player::Render()
 {
 	SAFE_RENDER(m_pAnimation);
 	SAFE_RENDER(m_hitCircle);
-	//SAFE_RENDER(m_pBar);
+	SAFE_RENDER(m_pBar);
 
 	//g_pTextManager->IntRender(m_nNumJump, 10, WINSIZEY - 120, 50, NumberType::Blue);
 
