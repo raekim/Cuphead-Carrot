@@ -312,16 +312,17 @@ void Player::Control()
 		currState = 2; // jump up, down 상관없이 동일한 애니메이션을 재생합니다
 
 		float speed = (m_fJumpPower - m_fElapsedGravity) * g_pTimeManager->GetDeltaTime();
-		m_fElapsedGravity += GRAVITY * g_pTimeManager->GetDeltaTime();
+		m_fElapsedGravity += GRAVITY * g_pTimeManager->GetDeltaTime(); // 기본적으로 작용하는 중력
 
-		if (m_fJumpPower > m_fElapsedGravity)	// 위로 올라갈 때
+		// 스페이스에서 손을 떼거나 아래로 떨어질 때 중력이 더 크게 작용한다
+		// 스페이스를 계속 누르고 있을 수록 길게 점프하는 효과
+		if (!g_pKeyManager->isStayKeyDown(VK_SPACE) || m_fJumpPower <= m_fElapsedGravity)
 		{
-			m_vPosition.y += speed;
+			m_fElapsedGravity += 2 * GRAVITY * g_pTimeManager->GetDeltaTime(); // 추가 중력 작용
+			float speed = (m_fJumpPower - m_fElapsedGravity) * g_pTimeManager->GetDeltaTime();
 		}
-		else // 아래로 떨어질 때
-		{
-			m_vPosition.y += speed;
-		}
+
+		m_vPosition.y += speed;
 
 		if (m_vPosition.y <= m_pMap->GetGroundY() + 150 - m_fMoveY)
 		{

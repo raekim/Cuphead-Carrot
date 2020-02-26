@@ -81,6 +81,11 @@ void Boss::Init()
 		m_pBar->SetSize(m_pAnimation->GetWidth(), 30);
 		m_pBar->Init();
 	}
+
+	for (auto b : m_carrotBullets)
+	{
+		b->Init();
+	}
 }
 
 void Boss::Update(PlayerBullet* playerBullets, D3DXVECTOR2 playerPos)

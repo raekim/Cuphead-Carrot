@@ -12,6 +12,11 @@ MainGame::MainGame()
 	CreateGameClasses();
 
 	this->Init();
+
+	started = false;
+	g_pTextureManager->AddTexture(L"title-screen", L"title-screen.png");
+	titleScreen = new Sprite(L"title-screen", 1, 1, 0);
+	titleScreen->Init();
 }
 
 void MainGame::SetViewProjectionMatrixes()
@@ -112,9 +117,16 @@ void MainGame::Init()
 
 void MainGame::Update()
 {
-	if (g_pKeyManager->isOnceKeyDown(VK_F9)) // 게임 초기화
+	if (g_pKeyManager->isOnceKeyDown(VK_F9))
+	{ // 게임 초기화
+		started = true;
 		this->Init();
+	}
 
+	if (!started)
+	{
+		titleScreen->Update();
+	}
 	
 	m_pPlayer->Update(m_pBoss->GetCarrotBulletes());
 	m_pBoss->Update(m_pPlayer->GetBullets(), m_pPlayer->GetPosition());
@@ -150,7 +162,11 @@ void MainGame::Render()
 	m_pMap->Render(0);
 
 
-	
+	// 타이틀 스크린
+	if (!started)
+	{
+		titleScreen->Render();
+	}
 
 	//g_pTextManager->AlphabetRender("ABCDEFG", 10, WINSIZEY - 60, 50);
 

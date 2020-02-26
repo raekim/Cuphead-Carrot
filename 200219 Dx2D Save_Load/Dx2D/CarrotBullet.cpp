@@ -22,7 +22,6 @@ CarrotBullet::CarrotBullet()
 
 
 	// 부서지는 동작
-
 	this->Init();
 }
 
@@ -33,6 +32,7 @@ CarrotBullet::~CarrotBullet()
 
 void CarrotBullet::Init()
 {
+	Destory();
 	m_active = false;
 	m_eState = STATE::SHOOTING;
 	m_pAnimation->Play(m_eState);
@@ -84,5 +84,5 @@ void CarrotBullet::Destory()
 void CarrotBullet::Spawn()
 {
 	m_active = true;
-	this->m_vPosition = { static_cast<FLOAT>(rand() % WINSIZEX), static_cast<float>(WINSIZEY) };
+	this->m_vPosition = { static_cast<FLOAT>(rand() % WINSIZEX), static_cast<float>(WINSIZEY) - 5 };
 }

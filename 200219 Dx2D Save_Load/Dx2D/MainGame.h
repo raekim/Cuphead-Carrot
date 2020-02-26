@@ -24,6 +24,8 @@ private:
 	Rect*			m_pRect;
 	ProgressBar*	m_pProgressBar;
 
+	bool			started;
+	Sprite*			titleScreen;
 public:
 	MainGame();
 	~MainGame();
