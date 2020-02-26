@@ -49,6 +49,9 @@
     <Filter Include="Dx2D Framework\2. Manager\File">
       <UniqueIdentifier>{942fbf0b-5b0c-4d8b-8be4-a335e823d60f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dx2D Framework\2. Manager\Particle">
+      <UniqueIdentifier>{d11fb780-ee67-4062-b766-f1f0a66398e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -141,6 +144,12 @@
     <ClInclude Include="CarrotBullet.h">
       <Filter>Dx2D Framework\4. GameClasses</Filter>
     </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Dx2D Framework\2. Manager\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleManager.h">
+      <Filter>Dx2D Framework\2. Manager\Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainGame.cpp">
@@ -214,6 +223,12 @@
     </ClCompile>
     <ClCompile Include="CarrotBullet.cpp">
       <Filter>Dx2D Framework\4. GameClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Dx2D Framework\2. Manager\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleManager.cpp">
+      <Filter>Dx2D Framework\2. Manager\Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

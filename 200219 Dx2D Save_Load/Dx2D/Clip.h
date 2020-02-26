@@ -69,5 +69,6 @@ public:
 	float GetHeight() { return m_vecFrame[m_nCurrFrame]->pSprite->GetHeight(); }
 
 	void SetOnce() { m_ePlayMode = PlayMode::Once; }
+	bool IsPlaying() { return m_isPlaying; }
 };
 

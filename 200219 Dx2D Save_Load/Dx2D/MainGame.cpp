@@ -17,6 +17,8 @@ MainGame::MainGame()
 	g_pTextureManager->AddTexture(L"title-screen", L"title-screen.png");
 	titleScreen = new Sprite(L"title-screen", 1, 1, 0);
 	titleScreen->Init();
+
+	// 파티클 생성 및 저장
 }
 
 void MainGame::SetViewProjectionMatrixes()
@@ -113,6 +115,8 @@ void MainGame::Init()
 	}
 
 	g_camX = 0;
+
+	g_pParticleManager->Init();
 }
 
 void MainGame::Update()
@@ -135,6 +139,8 @@ void MainGame::Update()
 	float mouse[2] = { g_ptMouse.x, g_ptMouse.y };
 
 	ImGui::DragFloat2("Mouse", mouse);
+
+	g_pParticleManager->Update();
 }
 
 void MainGame::Render()
@@ -161,6 +167,7 @@ void MainGame::Render()
 	m_pBoss->RenderBullets();
 	m_pMap->Render(0);
 
+	g_pParticleManager->Render();
 
 	// 타이틀 스크린
 	if (!started)
